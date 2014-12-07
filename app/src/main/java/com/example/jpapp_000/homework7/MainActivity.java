@@ -11,19 +11,47 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 
 public class MainActivity extends Activity {
+    private GoogleMap gmap;
+
+    static final LatLng Louisville = new LatLng(38.250, 85.766);
+    static final LatLng Cincy = new LatLng(39.100, 84.516);
+    static final LatLng Indy = new LatLng(39.791,86.148);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
+        setContentView(R.layout.fragment_main);
+        /*if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
-        }
+        }*/
+
+        gmap = ((MapFragment)getFragmentManager().findFragmentById(R.id.map)).getMap();
+
+        Marker louisville= gmap.addMarker(new MarkerOptions()
+        .position(Louisville)
+        .title("Louisville,KY")
+        .draggable(true));
+
+        Marker cincy = gmap.addMarker(new MarkerOptions()
+        .position(Louisville)
+        .title("Cincinatti,Ohio")
+        .draggable(true));
+
+        Marker indy = gmap.addMarker(new MarkerOptions()
+        .position(Indy)
+        .title("Indianapolis, Indiana")
+        .draggable(true));
     }
 
 
